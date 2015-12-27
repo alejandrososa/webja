@@ -14,6 +14,8 @@ use yii\filters\VerbFilter;
  */
 class PaginasController extends Controller
 {
+
+
     public function behaviors()
     {
         return [
@@ -42,6 +44,31 @@ class PaginasController extends Controller
             'dataProvider' => $dataProvider,
             'model' => $model
         ]);
+    }
+
+
+    /**
+     * Updates an existing JaPaginas model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param string $id
+     * @return mixed
+     */
+    public function actionPortada()
+    {
+        $model = $this->findModelPortada();
+        $model->scenario = 'update';
+        $imagen = ['uploadUrl' => '@backend/web/imagenes/paginas'];
+
+        //print_r(Yii::$app->request->post()); die();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['portada', 'id' => $model->id]);
+        } else {
+            return $this->render('portada', [
+                'model' => $model,
+                'imagenUp' => $imagen
+            ]);
+        }
     }
 
     /**
@@ -130,6 +157,19 @@ class PaginasController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    protected function findModelPortada()
+    {
+        if (($model = JaPaginas::find()
+                ->where(['tipo' => JaPaginas::TIPO_PORTADA, 'categoria' => 0])
+                ->with(['autores','categorias'])
+                ->one()) !== null) {
+            return $model;
+        } else {
+            return new JaPaginas();
+            //throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
 }

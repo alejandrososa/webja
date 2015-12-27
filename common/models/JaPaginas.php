@@ -35,6 +35,8 @@ use yii\helpers\ArrayHelper;
 class JaPaginas extends \yii\db\ActiveRecord
 {
 
+    const TIPO_PORTADA = 'portada';
+    const TIPO_CONTACTO = 'contacto';
 
     /**
      * @inheritdoc
