@@ -1,0 +1,4 @@
+
+
+#activar gii
+composer.phar require --dev --prefer-dist yiisoft/yii2-gii
