@@ -999,6 +999,50 @@
     ],
     "packages-dev": [
         {
+<<<<<<< HEAD
+=======
+            "name": "bower-asset/jcrop",
+            "version": "v0.9.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tapmodo/Jcrop.git",
+                "reference": "f68e8f79ab53f871796b7a4b555a6b5517b6b8cd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tapmodo/Jcrop/zipball/f68e8f79ab53f871796b7a4b555a6b5517b6b8cd",
+                "reference": "f68e8f79ab53f871796b7a4b555a6b5517b6b8cd",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "js/jquery.Jcrop.js",
+                    "css/jquery.Jcrop.css"
+                ],
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "build",
+                    "demos",
+                    "node_modules",
+                    "bower_components"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Image cropping plugin for jQuery",
+            "keywords": [
+                "crop",
+                "cropper",
+                "cropping",
+                "form",
+                "image",
+                "img"
+            ]
+        },
+        {
+>>>>>>> b9881a197a9b1a140feb3d70f0ca4aa18b946081
             "name": "bower-asset/typeahead.js",
             "version": "v0.10.5",
             "source": {
