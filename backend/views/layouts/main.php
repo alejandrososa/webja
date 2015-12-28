@@ -7,7 +7,9 @@ use backend\assets\AppAsset;
 use backend\assets\BackendAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
+use yii\bootstrap\NavBar;
 use common\widgets\Alert;
+use yii\widgets\Breadcrumbs;
 
 //AppAsset::register($this);
 BackendAsset::register($this);
@@ -34,7 +36,7 @@ BackendAsset::register($this);
                 <li class="header-nav-brand" >
                     <div class="brand-holder">
                         <a href="../../html/dashboards/dashboard.html">
-                            <span class="text-lg text-bold text-primary">MATERIAL ADMIN</span>
+                            <span class="text-lg text-bold text-primary">CMS JA</span>
                         </a>
                     </div>
                 </li>
@@ -161,8 +163,54 @@ BackendAsset::register($this);
     <!-- BEGIN CONTENT-->
     <div id="content">
 
+        <section>
+            <div class="section-header">
+
+                <?php echo Breadcrumbs::widget([
+                    'tag' => 'ol',
+                    'homeLink' => [
+                        'label' => Yii::t('yii', 'Oficina'),
+                        'url' => Yii::$app->homeUrl,
+                    ],
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]) ?>
+
+            </div>
+
+
+            <?php
+/*
+            NavBar::begin([
+                'brandLabel' => 'My Company',
+                'brandUrl' => Yii::$app->homeUrl,
+                'options' => [
+                    'class' => 'navbar-default',
+                ],
+            ]);
+            $menuItems = [
+                ['label' => 'Home', 'url' => ['/site/index']],
+            ];
+            if (Yii::$app->user->isGuest) {
+                $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+            } else {
+                $menuItems[] = [
+                    'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                    'url' => ['/site/logout'],
+                    'linkOptions' => ['data-method' => 'post']
+                ];
+            }
+            echo Nav::widget([
+                'options' => ['class' => 'navbar-nav navbar-collapse'],
+                'items' => $menuItems,
+            ]);
+            NavBar::end();*/
+            ?>
+
+
+
             <?= Alert::widget() ?>
             <?= $content ?>
+        </section>
 
     <?php
     /*
@@ -206,20 +254,22 @@ BackendAsset::register($this);
             </div>
             <div class="expanded">
                 <a href="../../html/dashboards/dashboard.html">
-                    <span class="text-lg text-bold text-primary ">MATERIAL&nbsp;ADMIN</span>
+                    <span class="text-lg text-bold text-primary ">CMS&nbsp;JA</span>
                 </a>
             </div>
         </div>
         <div class="menubar-scroll-panel">
+
+
 
             <!-- BEGIN MAIN MENU -->
             <ul id="main-menu" class="gui-controls">
 
                 <!-- BEGIN DASHBOARD -->
                 <li>
-                    <a href="../../html/dashboards/dashboard.html" >
+                    <a href="<?php echo Yii::$app->urlManager->createUrl(['/']); ?>" >
                         <div class="gui-icon"><i class="md md-home"></i></div>
-                        <span class="title">Dashboard</span>
+                        <span class="title">Oficina</span>
                     </a>
                 </li><!--end /menu-li -->
                 <!-- END DASHBOARD -->
@@ -227,15 +277,14 @@ BackendAsset::register($this);
                 <!-- BEGIN EMAIL -->
                 <li class="gui-folder">
                     <a>
-                        <div class="gui-icon"><i class="md md-email"></i></div>
-                        <span class="title">Email</span>
+                        <div class="gui-icon"><i class="md md-computer"></i></div>
+                        <span class="title">Paginas</span>
                     </a>
                     <!--start submenu -->
                     <ul>
-                        <li><a href="../../html/mail/inbox.html" ><span class="title">Inbox</span></a></li>
-                        <li><a href="../../html/mail/compose.html" ><span class="title">Compose</span></a></li>
-                        <li><a href="../../html/mail/reply.html" ><span class="title">Reply</span></a></li>
-                        <li><a href="../../html/mail/message.html" ><span class="title">View message</span></a></li>
+                        <li><a href="<?php echo Yii::$app->urlManager->createUrl(['paginas/paginas/portada']); ?>" ><span class="title">Portada</span></a></li>
+                        <li><a href="<?php echo Yii::$app->urlManager->createUrl(['paginas/paginas/contacto']); ?>" ><span class="title">Conctacto</span></a></li>
+                        <li><a href="<?php echo Yii::$app->urlManager->createUrl(['paginas/paginas/index']); ?>" ><span class="title">Todas</span></a></li>
                     </ul><!--end /submenu -->
                 </li><!--end /menu-li -->
                 <!-- END EMAIL -->
@@ -317,9 +366,9 @@ BackendAsset::register($this);
                 <!-- END FORMS -->
 
                 <!-- BEGIN PAGES -->
-                <li class="gui-folder">
+                <li class="gui-folder1">
                     <a>
-                        <div class="gui-icon"><i class="md md-computer"></i></div>
+                        <div class="gui-icon"><i class="md md-computer1"></i></div>
                         <span class="title">Pages</span>
                     </a>
                     <!--start submenu -->

@@ -8,37 +8,19 @@
 use yii\helpers\Html;
 
 $this->title = $name;
+$this->params['breadcrumbs'][] = $code;
+
+$clase = isset($code) && $code == "404" ? 'fa fa-search-minus text-primary' : 'fa fa-exclamation-circle text-danger';
 ?>
-<div class="site-error">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <div class="alert alert-danger">
-        <?= nl2br(Html::encode($message)) ?>
-    </div>
-
-    <p>
-        The above error occurred while the Web server was processing your request.
-    </p>
-    <p>
-        Please contact us if you think this is a server error. Thank you.
-    </p>
-
-</div>
 
 
-
-
-<!-- BEGIN BLANK SECTION -->
-<section>
-    <div class="section-header">
-        <ol class="breadcrumb">
-            <li><a href="../../html/.html">home</a></li>
-            <li class="active">Blank page</li>
-        </ol>
-    </div><!--end .section-header -->
-    <div class="section-body">
+<!-- BEGIN 500 MESSAGE -->
+    <div class="section-body contain-lg">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <?php  Html::encode($this->title) ?>
+                <h1><span class="text-xxxl text-light"><?php echo $code; ?>  <i class="<?php echo $clase; ?>"></i></span></h1>
+                <h2 class="text-light"><?= nl2br(Html::encode($message)) ?></h2>
+            </div><!--end .col -->
+        </div><!--end .row -->
     </div><!--end .section-body -->
-</section>
-
-
