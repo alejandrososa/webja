@@ -139,3 +139,6 @@ a.desc:after {
     bottom: 32px;
     right: 16px;
 }
+input[type='hidden']{
+    display: none;
+}
