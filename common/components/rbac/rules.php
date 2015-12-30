@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alejandro.sosa
- * Date: 30/12/2015
- * Time: 17:56
- */
 return [
-    'userRole' => 'O:35:"common\\components\\rbac\\UserRoleRule":3:{s:4:"name";s:8:"userRole";s:9:"createdAt";N;s:9:"updatedAt";N;}',
+    'userGroup' => 'O:31:"common\\extensions\\UserGroupRule":3:{s:4:"name";s:9:"userGroup";s:9:"createdAt";N;s:9:"updatedAt";N;}',
 ];

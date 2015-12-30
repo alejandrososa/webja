@@ -35,13 +35,14 @@ class SiteController extends Controller
                     ],
                 ],
                 'denyCallback' => function ($rule, $action) {
-                    throw new \Exception('You are not allowed to access this page');
+                    throw new \Exception(', You are not allowed to access this page');
+                    //throw new \Exception('You are not allowed to access this page');
                 },
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    //'logout' => ['post'],
                 ],
             ],
         ];
@@ -73,17 +74,20 @@ class SiteController extends Controller
     {
         $this->layout = 'invitados';
         if (!\Yii::$app->user->isGuest) {
+            //print_r('entro aqui :('); die();
             return $this->goHome();
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            //return $this->goBack();
-            print_r('1');die();
-            $this->redirect(\Yii::$app->urlManager->createUrl("test/show"));
+            //print_r(Yii::$app->request->post());die();
+
+            return $this->goBack();
+            //print_r('1');die();
+            //$this->redirect(\Yii::$app->urlManager->createUrl("paginas/paginas/portada"));
         } else {
             $var = \Yii::$app->user->isGuest ? 'si' : 'no';
-            print_r('2 '.$var);die();
+            //print_r('2 '.$var);die();
             return $this->render('login', [
                 'model' => $model,
             ]);

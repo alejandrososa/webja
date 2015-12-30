@@ -26,6 +26,11 @@ use Yii;
  */
 class JaUsuarios extends \yii\db\ActiveRecord
 {
+    const ES_ADMIN = 'S';
+    const ES_AUTOR = 'A';
+    const ES_VISITA = 'V';
+
+
     /**
      * @inheritdoc
      */

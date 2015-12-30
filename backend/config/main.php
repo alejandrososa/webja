@@ -17,7 +17,7 @@ return [
             'defaultRoute' => 'paginas',
         ],
     ],
-    'homeUrl' => '/admin',
+    'homeUrl' => '/admin/login',
     'components' => [
         'request' => [
             'baseUrl' => '/admin',
@@ -52,9 +52,14 @@ return [
                 '<controller:\w+>/<action:\w+>'=>'controller/controller/action',
             ],
         ],
-        /*'authManager' => [
-            'class' => 'yii\rbac\DbManager',
-        ],*/
+        'authManager' => [
+            //'class' => 'yii\rbac\DbManager',
+            'class' => 'yii\rbac\PhpManager',
+            'defaultRoles' => ['visita','admin'],
+            'itemFile' => '@common/components/rbac/items.php',
+            'assignmentFile' => '@common/components/rbac/assignments.php',
+            'ruleFile' => '@common/components/rbac/rules.php'
+        ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,

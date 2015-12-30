@@ -26,6 +26,10 @@ return [
                     'pattern' => '/',
                     'route' => 'site/index',
                     //'suffix' => '.htm',
+                ],[
+                    'pattern' => '/rbac',
+                    'route' => 'rbac/init',
+                    //'suffix' => '.htm',
                 ]
             ]
         ],

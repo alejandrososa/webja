@@ -6,12 +6,12 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace common\commands;
-//namespace frontend\controllers;
+//namespace common\commands;
+namespace frontend\controllers;
 
 use Yii;
 use yii\console\Controller;
-use c;
+use common\extensions\UserGroupRule;
 
 /**
  * Rbac Controller. 
