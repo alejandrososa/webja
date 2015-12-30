@@ -11,8 +11,14 @@ return [
             'class' => 'yii\caching\FileCache',
         ],
         'authManager' => [
-            'class' => 'yii\rbac\DbManager',
-            'defaultRoles' => ['guest']
+            //'class' => 'yii\rbac\DbManager',
+            //'defaultRoles' => ['admin']
+
+            'class' => 'yii\rbac\PhpManager',
+            'defaultRoles' => ['user','moder','admin'],
+            'itemFile' => '@common/components/rbac/items.php',
+            'assignmentFile' => '@common/components/rbac/assignments.php',
+            'ruleFile' => '@common/components/rbac/rules.php'
         ],
         'thumbnail' => [
             'class' => 'himiklab\thumbnail\EasyThumbnail',

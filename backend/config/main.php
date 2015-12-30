@@ -26,18 +26,35 @@ return [
             'scriptUrl'=>'/admin',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            //'enableStrictParsing' => true,
             'rules' =>[
+                [
+                    'pattern' => 'login',
+                    'route' => 'site/login',
+                    //'suffix' => '.htm',
+                ],
+                [
+                    'pattern' => 'paginas',
+                    'route' => 'paginas/paginas/indes',
+                    //'suffix' => '.htm',
+                ],
+
+                //'login' => 'site/login',
+                'logout' => 'site/logout',
                 //paginas
                 /*'<module:(paginas)>/<id:\d+>' => '<module>/default/view',
                 '<module:(paginas)>/<action:(index|view|me|delete|create|update|login|logout)>/<id:\d+>' => '<module>/default/<action>',
                 '<module:(paginas)>/<action:(index|view|me|delete|create|update|login|logout)>' => '<module>/default/<action>',
-
+*/
                 '<controller:\w+>/<id:\d+>'=>'<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
                 '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-                '<controller:\w+>/<action:\w+>'=>'controller/controller/action',*/
+                '<controller:\w+>/<action:\w+>'=>'controller/controller/action',
             ],
         ],
+        /*'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],*/
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,

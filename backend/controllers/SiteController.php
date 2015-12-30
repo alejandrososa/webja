@@ -21,17 +21,22 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
+                'only' => ['login', 'logout', 'signup'],
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
                         'allow' => true,
+                        'actions' => ['login', 'signup'],
+                        'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'index'],
                         'allow' => true,
+                        'actions' => ['logout'],
                         'roles' => ['@'],
                     ],
                 ],
+                'denyCallback' => function ($rule, $action) {
+                    throw new \Exception('You are not allowed to access this page');
+                },
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -49,7 +54,8 @@ class SiteController extends Controller
     {
         return [
             'error' => [
-                'class' => 'yii\web\ErrorAction',
+                //'class' => 'yii\web\ErrorAction',
+                'class' => 'common\extensions\AppErrorAction',
             ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
@@ -73,8 +79,11 @@ class SiteController extends Controller
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             //return $this->goBack();
+            print_r('1');die();
             $this->redirect(\Yii::$app->urlManager->createUrl("test/show"));
         } else {
+            $var = \Yii::$app->user->isGuest ? 'si' : 'no';
+            print_r('2 '.$var);die();
             return $this->render('login', [
                 'model' => $model,
             ]);

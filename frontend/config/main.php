@@ -17,9 +17,17 @@ return [
             'baseUrl' => '',
         ],
         'urlManager' => [
-            'scriptUrl'=>'/index.php',
+            'scriptUrl'=>'/index.htm',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'enableStrictParsing' => true,
+            'rules' =>[
+                [
+                    'pattern' => '/',
+                    'route' => 'site/index',
+                    //'suffix' => '.htm',
+                ]
+            ]
         ],
         'user' => [
             'identityClass' => 'common\models\User',
