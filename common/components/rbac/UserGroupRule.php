@@ -1,6 +1,6 @@
 <?php
 
-namespace common\extensions;
+namespace common\components\rbac;
 
 use Yii;
 use yii\rbac\Rule;
@@ -15,13 +15,13 @@ class UserGroupRule extends Rule {
 
     public function execute($user, $item, $params) {
         if (!Yii::$app->user->isGuest) {
-            $group = Yii::$app->user->identity->user_type;
+            $group = Yii::$app->user->identity->tipo;
             if ($item->name === 'admin') {
-                return $group == JaUsuarios::ES_ADMIN;
+                return $group == User::ES_ADMIN;
             } elseif ($item->name === 'autor') {
-                return $group == JaUsuarios::ES_AUTOR;
+                return $group == User::ES_AUTOR;
             }elseif($item->name === 'visita'){
-                return $group == JaUsuarios::ES_VISITA;
+                return $group == User::ES_VISITA;
             }
         }
         return false;

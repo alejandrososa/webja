@@ -1,6 +1,8 @@
 <?php
 namespace backend\controllers;
 
+use backend\models\RegistrarseForm;
+use common\components\rbac\UserGroupRule;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -21,28 +23,34 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['login', 'logout', 'signup'],
+                //'only' => ['login', 'logout', 'signup'],
                 'rules' => [
                     [
+                        'actions' => ['acceso','registrarse'], //'auth'
                         'allow' => true,
-                        'actions' => ['login', 'signup'],
                         'roles' => ['?'],
                     ],
                     [
+                        'actions' => ['salir','error'],
                         'allow' => true,
-                        'actions' => ['logout'],
                         'roles' => ['@'],
                     ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['admin', 'visita'],
+                    ]
+
                 ],
-                'denyCallback' => function ($rule, $action) {
-                    throw new \Exception(', You are not allowed to access this page');
+                //'denyCallback' => function ($rule, $action) {
+                    //throw new \Exception(', You are not allowed to access this page');
                     //throw new \Exception('You are not allowed to access this page');
-                },
+                //},
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    //'logout' => ['post'],
+                    //'salir' => ['post'],
                 ],
             ],
         ];
@@ -70,28 +78,21 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionLogin()
+    public function actionAcceso()
     {
-        $this->layout = 'invitados';
         if (!\Yii::$app->user->isGuest) {
-            //print_r('entro aqui :('); die();
             return $this->goHome();
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            //print_r(Yii::$app->request->post());die();
-
             return $this->goBack();
-            //print_r('1');die();
-            //$this->redirect(\Yii::$app->urlManager->createUrl("paginas/paginas/portada"));
-        } else {
-            $var = \Yii::$app->user->isGuest ? 'si' : 'no';
-            //print_r('2 '.$var);die();
-            return $this->render('login', [
-                'model' => $model,
-            ]);
         }
+
+        $this->layout = 'invitados';
+        return $this->render('acceso', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -99,10 +100,9 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionLogout()
+    public function actionSalir()
     {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
 
@@ -111,9 +111,11 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionSignup()
+    public function actionRegistrarse()
     {
-        $model = new SignupForm();
+        $this->layout = 'invitados';
+
+        $model = new RegistrarseForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
@@ -122,7 +124,7 @@ class SiteController extends Controller
             }
         }
 
-        return $this->render('signup', [
+        return $this->render('registrarse', [
             'model' => $model,
         ]);
     }
@@ -184,4 +186,27 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
+
+    /*public function actionAuth()
+    {
+
+        $auth = Yii::$app->authManager;
+        $rule = new UserGroupRule(); //\common\components\rbac\UserGroupRule;
+        $auth->add($rule);
+
+        $admin = $auth->createRole('admin');
+        $admin->ruleName = $rule->name;
+        $auth->add($admin);
+
+        $author = $auth->createRole('autor');
+        $author->ruleName = $rule->name;
+        $auth->add($author);
+
+        $visita = $auth->createRole('visita');
+        $visita->ruleName = $rule->name;
+        $auth->add($visita);
+        // ... add permissions as children of $author ...
+        //$auth->addChild($admin, $author);
+
+    }*/
 }

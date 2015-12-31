@@ -3,6 +3,9 @@ return [
     'admin' => [
         'type' => 1,
         'ruleName' => 'userGroup',
+        'children' => [
+            'autor',
+        ],
     ],
     'autor' => [
         'type' => 1,

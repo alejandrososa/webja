@@ -1,5 +1,5 @@
 <?php
-namespace frontend\models;
+namespace backend\models;
 
 use common\models\User;
 use yii\base\Model;
@@ -8,7 +8,7 @@ use Yii;
 /**
  * Signup form
  */
-class SignupForm extends Model
+class RegistrarseForm extends Model
 {
     public $username;
     public $email;
@@ -37,6 +37,17 @@ class SignupForm extends Model
     }
 
     /**
+     * @return array customized attribute labels (name=>label)
+     */
+    public function attributeLabels() {
+        return array(
+            'username' => Yii::t('app', 'Usuario'),
+            'password' => Yii::t('app', 'Clave'),
+            'email' => Yii::t('app', 'Correo'),
+        );
+    }
+
+    /**
      * Signs user up.
      *
      * @return User|null the saved model or null if saving fails
@@ -48,9 +59,14 @@ class SignupForm extends Model
             $user->username = $this->username;
             $user->email = $this->email;
             $user->setPassword($this->password);
+            $user->tipo = User::ES_VISITA;
             $user->generateAuthKey();
             if ($user->save()) {
                 return $user;
+                // the following three lines were added:
+                $auth = Yii::$app->authManager;
+                $authorRole = $auth->getRole('visita');
+                $auth->assign($authorRole, $user->getId());
             }
         }
 

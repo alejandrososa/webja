@@ -20,11 +20,15 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
+ * @property string $tipo
  */
 class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
+    const ES_ADMIN = 'S';
+    const ES_AUTOR = 'A';
+    const ES_VISITA = 'V';
 
     /**
      * @inheritdoc
@@ -52,6 +56,8 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            ['tipo', 'default', 'value' => self::ES_VISITA],
+            ['tipo', 'in', 'range' => [self::ES_VISITA, self::ES_AUTOR, self::ES_ADMIN]],
         ];
     }
 
@@ -185,4 +191,29 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+    /**
+     * Check if the user is admin
+     * @return boolean
+     */
+    public function isAdmin() {
+        return $this->user_type == self::ES_ADMIN;
+    }
+
+    /**
+     * Check if user is Gestor
+     * @return boolean
+     */
+    public function isAutor() {
+        return $this->user_type == self::ES_AUTOR;
+    }
+
+    /**
+     * Check if user is ITNOW
+     * @return boolean
+     */
+    public function isVisita() {
+        return $this->user_type == self::ES_VISITA;
+    }
+
 }

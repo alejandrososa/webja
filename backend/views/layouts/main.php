@@ -136,7 +136,7 @@ BackendAsset::register($this);
                         <li><a href="../../html/pages/calendar.html">My appointments</a></li>
                         <li class="divider"></li>
                         <li><a href="../../html/pages/locked.html"><i class="fa fa-fw fa-lock"></i> Lock</a></li>
-                        <li><a href="<?php echo Yii::$app->urlManager->createUrl(['/logout']); ?>"><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
+                        <li><a href="<?php echo Yii::$app->urlManager->createUrl(['/site/logout']); ?>"><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
                     </ul><!--end .dropdown-menu -->
                 </li><!--end .dropdown -->
             </ul><!--end .header-nav-profile -->
@@ -267,7 +267,7 @@ BackendAsset::register($this);
 
                 <!-- BEGIN DASHBOARD -->
                 <li>
-                    <a href="<?php echo Yii::$app->urlManager->createUrl(['/']); ?>" >
+                    <a href="<?php echo Yii::$app->urlManager->createUrl(['/site/index']); ?>" >
                         <div class="gui-icon"><i class="md md-home"></i></div>
                         <span class="title">Oficina</span>
                     </a>

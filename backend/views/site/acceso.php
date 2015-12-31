@@ -7,12 +7,12 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Login';
+$this->title = 'Acceso';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-
-<div class="img-backdrop" style="background-image: url('../../assets/img/img16.jpg')"></div>
+<!-- style="background-image: url('../../assets/img/img16.jpg')" -->
+<div class="img-backdrop"></div>
 <div class="spacer"></div>
 <div class="card contain-sm style-transparent">
     <div class="card-body">
@@ -24,7 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?php $form = ActiveForm::begin(['id' => 'login-form', 'options' => ['class'=> 'class="form floating-label"']]); ?>
 
-                    <?= $form->field($model, 'username')->textInput()->label('Usuario', ['class' => '']) ?>
+                    <?= $form->field($model, 'username')->textInput()->label('Usuario',
+                        ['class' => '', 'maxlength' => '20', 'autofocus' => true, 'autocomplete' => false,]) ?>
                     <?= $form->field($model, 'password')->passwordInput() ?>
 
 
@@ -45,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php ActiveForm::end(); ?>
 
 
-                <form class="form floating-label" action="../../html/dashboards/dashboard.html" accept-charset="utf-8" method="post">
+                <!--<form class="form floating-label" action="../../html/dashboards/dashboard.html" accept-charset="utf-8" method="post">
                     <div class="form-group">
                         <input type="text" class="form-control" id="username" name="username">
                         <label for="username">Username</label>
@@ -57,23 +58,24 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <br/>
 
-                </form>
+                </form>-->
             </div><!--end .col -->
             <div class="col-sm-5 col-sm-offset-1 text-center">
                 <br><br>
+                <h3 class="text-light"><?php echo Yii::t('app', 'No tiene cuenta todavia?'); ?></h3>
+                <a class="btn btn-block btn-raised btn-primary" href="<?php echo Yii::$app->urlManager->createUrl(['site/registrarse']); ?>">
+                    <?php echo Yii::t('app', 'Registrarse') ?>
+                </a>
                 <h3 class="text-light">
-                    No account yet?
+                    o
                 </h3>
-                <a class="btn btn-block btn-raised btn-primary" href="#">Sign up here</a>
-                <br><br>
-                <h3 class="text-light">
-                    or
-                </h3>
+                <br>
+
                 <p>
-                    <a href="#" class="btn btn-block btn-raised btn-info"><i class="fa fa-facebook pull-left"></i>Login with Facebook</a>
+                    <a href="#" class="btn btn-block btn-raised btn-info"><i class="fa fa-facebook pull-left"></i><?php echo Yii::t('app', 'Acceder con Facebook'); ?></a>
                 </p>
                 <p>
-                    <a href="#" class="btn btn-block btn-raised btn-info"><i class="fa fa-twitter pull-left"></i>Login with Twitter</a>
+                    <a href="#" class="btn btn-block btn-raised btn-info"><i class="fa fa-twitter pull-left"></i><?php echo Yii::t('app', 'Acceder con Twitter'); ?></a>
                 </p>
             </div><!--end .col -->
         </div><!--end .row -->
