@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * Site controller
  */
-class SiteController extends Controller
+class OficinaController extends Controller
 {
     public $layout = 'main';
     /**
@@ -50,7 +50,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    //'salir' => ['post'],
+                    'salir' => ['post'],
                 ],
             ],
         ];

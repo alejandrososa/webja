@@ -27,7 +27,7 @@ return [
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
-            'loginUrl' => ['site/acceso']
+            'loginUrl' => ['oficina/acceso']
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',

@@ -33,6 +33,7 @@ class BackendAsset extends AssetBundle
 		'css/theme-default/libs/bootstrap-tagsinput/bootstrap-tagsinput.css?1424887862',
 		'css/theme-default/libs/typeahead/typeahead.css?1424887863',
 		'css/theme-default/libs/dropzone/dropzone-theme.css?1424887864',
+		'css/theme-default/libs/summernote/summernote.css'
     ];
     public $js = [
 
@@ -55,6 +56,8 @@ class BackendAsset extends AssetBundle
 		'js/libs/typeahead/typeahead.bundle.min.js',
 		'js/libs/dropzone/dropzone.min.js',
 		'js/libs/nanoscroller/jquery.nanoscroller.min.js',
+		//'js/libs/ckeditor/adapters/jquery.js',
+		'js/libs/summernote/summernote.min.js',
 
 		'js/core/source/App.js',
 		'js/core/source/AppNavigation.js',

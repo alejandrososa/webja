@@ -56,13 +56,15 @@ class PaginasController extends Controller
     public function actionPortada()
     {
         $model = $this->findModelPortada();
-        $model->scenario = 'update';
+        //$model->scenario = 'update';
         $imagen = ['uploadUrl' => '@backend/web/imagenes/paginas'];
 
         //print_r(Yii::$app->request->post()); die();
+        $model->categoria = JaPaginas::CATEGORIA_PRIV;
+        $model->tipo = JaPaginas::TIPO_PORTADA;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['portada', 'id' => $model->id]);
+            return $this->redirect(['portada']); //, 'id' => $model->id
         } else {
             return $this->render('portada', [
                 'model' => $model,
@@ -113,8 +115,8 @@ class PaginasController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->scenario = 'update';
-        $imagen = ['uploadUrl' => '@backend/web/imagenes/paginas'];
+        //$model->scenario = 'update';
+        //$imagen = ['uploadUrl' => '@backend/web/imagenes/paginas'];
 
         //print_r(Yii::$app->request->post()); die();
 
@@ -123,7 +125,7 @@ class PaginasController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'imagenUp' => $imagen
+            //    'imagenUp' => $imagen
             ]);
         }
     }
@@ -163,7 +165,7 @@ class PaginasController extends Controller
     protected function findModelPortada()
     {
         if (($model = JaPaginas::find()
-                ->where(['tipo' => JaPaginas::TIPO_PORTADA, 'categoria' => 0])
+                ->where(['tipo' => JaPaginas::TIPO_PORTADA, 'categoria' => JaPaginas::CATEGORIA_PRIV])
                 ->with(['autores','categorias'])
                 ->one()) !== null) {
             return $model;

@@ -37,6 +37,7 @@ class JaPaginas extends \yii\db\ActiveRecord
 
     const TIPO_PORTADA = 'portada';
     const TIPO_CONTACTO = 'contacto';
+    const CATEGORIA_PRIV = 0;
 
     /**
      * @inheritdoc

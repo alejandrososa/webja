@@ -36,32 +36,34 @@
 		if (!$.isFunction($.fn.typeahead)) {
 			return;
 		}
-		var countries = new Bloodhound({
-			datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-			queryTokenizer: Bloodhound.tokenizers.whitespace,
-			limit: 10,
-			prefetch: {
-				// url points to a json file that contains an array of country names, see
-				// https://github.com/twitter/typeahead.js/blob/gh-pages/data/countries.json
-				url: $('#autocomplete1').data('source'),
-				// the json file contains an array of strings, but the Bloodhound
-				// suggestion engine expects JavaScript objects so this converts all of
-				// those strings
-				filter: function (list) {
-					return $.map(list, function (country) {
-						return {name: country};
-					});
+		if($('#autocomplete1').length) {
+			var countries = new Bloodhound({
+				datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+				queryTokenizer: Bloodhound.tokenizers.whitespace,
+				limit: 10,
+				prefetch: {
+					// url points to a json file that contains an array of country names, see
+					// https://github.com/twitter/typeahead.js/blob/gh-pages/data/countries.json
+					url: $('#autocomplete1').data('source'),
+					// the json file contains an array of strings, but the Bloodhound
+					// suggestion engine expects JavaScript objects so this converts all of
+					// those strings
+					filter: function (list) {
+						return $.map(list, function (country) {
+							return {name: country};
+						});
+					}
 				}
-			}
-		});
-		countries.initialize();
-		$('#autocomplete1').typeahead(null, {
-			name: 'countries',
-			displayKey: 'name',
-			// `ttAdapter` wraps the suggestion engine in an adapter that
-			// is compatible with the typeahead jQuery plugin
-			source: countries.ttAdapter()
-		});
+			});
+			countries.initialize();
+			$('#autocomplete1').typeahead(null, {
+				name: 'countries',
+				displayKey: 'name',
+				// `ttAdapter` wraps the suggestion engine in an adapter that
+				// is compatible with the typeahead jQuery plugin
+				source: countries.ttAdapter()
+			});
+		}
 	};
 	
 	// =========================================================================

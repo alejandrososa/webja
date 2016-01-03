@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-sm-5 col-sm-offset-1 text-center">
                 <br><br>
                 <h3 class="text-light"><?php echo Yii::t('app', 'No tiene cuenta todavia?'); ?></h3>
-                <a class="btn btn-block btn-raised btn-primary" href="<?php echo Yii::$app->urlManager->createUrl(['site/registrarse']); ?>">
+                <a class="btn btn-block btn-raised btn-primary" href="<?php echo Yii::$app->urlManager->createUrl(['oficina/registrarse']); ?>">
                     <?php echo Yii::t('app', 'Registrarse') ?>
                 </a>
                 <h3 class="text-light">

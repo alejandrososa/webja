@@ -9,6 +9,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use common\widgets\Alert;
+use common\components\MetodosHelper;
 use yii\widgets\Breadcrumbs;
 
 //AppAsset::register($this);
@@ -49,42 +50,51 @@ BackendAsset::register($this);
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="headerbar-right">
-            <ul class="header-nav header-nav-options">
-                <li>
-                    <!-- Search form -->
-                    <form class="navbar-search" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="headerSearch" placeholder="Enter your keyword">
-                        </div>
-                        <button type="submit" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-search"></i></button>
-                    </form>
-                </li>
-                <li class="dropdown hidden-xs">
-                    <a href="javascript:void(0);" class="btn btn-icon-toggle btn-default" data-toggle="dropdown">
-                        <i class="fa fa-bell"></i><sup class="badge style-danger">4</sup>
-                    </a>
-                    <ul class="dropdown-menu animation-expand">
-                        <li class="dropdown-header">Today's messages</li>
-                        <li>
-                            <a class="alert alert-callout alert-warning" href="javascript:void(0);">
-                                <img class="pull-right img-circle dropdown-avatar" src="../../assets/img/avatar2.jpg?1404026449" alt="" />
-                                <strong>Alex Anistor</strong><br/>
-                                <small>Testing functionality...</small>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="alert alert-callout alert-info" href="javascript:void(0);">
-                                <img class="pull-right img-circle dropdown-avatar" src="../../assets/img/avatar3.jpg?1404026799" alt="" />
-                                <strong>Alicia Adell</strong><br/>
-                                <small>Reviewing last changes...</small>
-                            </a>
-                        </li>
-                        <li class="dropdown-header">Options</li>
-                        <li><a href="../../html/pages/login.html">View all messages <span class="pull-right"><i class="fa fa-arrow-right"></i></span></a></li>
-                        <li><a href="../../html/pages/login.html">Mark as read <span class="pull-right"><i class="fa fa-arrow-right"></i></span></a></li>
-                    </ul><!--end .dropdown-menu -->
-                </li><!--end .dropdown -->
-                <li class="dropdown hidden-xs">
+            <?php if(MetodosHelper::mostrarEnVista('portada')){ ?>
+                <ul class="header-nav header-nav-options">
+                    <li>
+                        <button id="enviarForm" type="button" class="btn ink-reaction btn-raised btn-primary btn-loading-state" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Guardando"><i class="glyphicon glyphicon-floppy-saved"></i> Guardar</button>
+                    </li>
+                </ul>
+            <?php } ?>
+
+            <?php if(MetodosHelper::ocultarEnVista('portada')){ ?>
+                <ul class="header-nav header-nav-options">
+                    <li>
+                            <!-- Search form -->
+                            <form class="navbar-search" role="search">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="headerSearch" placeholder="Enter your keyword">
+                                </div>
+                                <button type="submit" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-search"></i></button>
+                            </form>
+                    </li>
+                    <li class="dropdown hidden-xs">
+                        <a href="javascript:void(0);" class="btn btn-icon-toggle btn-default" data-toggle="dropdown">
+                            <i class="fa fa-bell"></i><sup class="badge style-danger">4</sup>
+                        </a>
+                        <ul class="dropdown-menu animation-expand">
+                            <li class="dropdown-header">Today's messages</li>
+                            <li>
+                                <a class="alert alert-callout alert-warning" href="javascript:void(0);">
+                                    <!--<img class="pull-right img-circle dropdown-avatar" src="../../web/img/avatar2.jpg?1404026449" alt="" />-->
+                                    <strong>Alex Anistor</strong><br/>
+                                    <small>Testing functionality...</small>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="alert alert-callout alert-info" href="javascript:void(0);">
+                                    <!--<img class="pull-right img-circle dropdown-avatar" src="../../web/img/avatar3.jpg?1404026799" alt="" />-->
+                                    <strong>Alicia Adell</strong><br/>
+                                    <small>Reviewing last changes...</small>
+                                </a>
+                            </li>
+                            <li class="dropdown-header">Options</li>
+                            <li><a href="../../html/pages/login.html">View all messages <span class="pull-right"><i class="fa fa-arrow-right"></i></span></a></li>
+                            <li><a href="../../html/pages/login.html">Mark as read <span class="pull-right"><i class="fa fa-arrow-right"></i></span></a></li>
+                        </ul><!--end .dropdown-menu -->
+                    </li><!--end .dropdown -->
+                    <li class="dropdown hidden-xs">
                     <a href="javascript:void(0);" class="btn btn-icon-toggle btn-default" data-toggle="dropdown">
                         <i class="fa fa-area-chart"></i>
                     </a>
@@ -119,11 +129,12 @@ BackendAsset::register($this);
                         </li><!--end .dropdown-progress -->
                     </ul><!--end .dropdown-menu -->
                 </li><!--end .dropdown -->
-            </ul><!--end .header-nav-options -->
+                </ul><!--end .header-nav-options -->
+            <?php } ?>
             <ul class="header-nav header-nav-profile">
                 <li class="dropdown">
                     <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
-                        <img src="../../assets/img/avatar1.jpg?1403934956" alt="" />
+                        <!--<img src="../../assets/img/avatar1.jpg?1403934956" alt="" />-->
 								<span class="profile-info">
 									Daniel Johnson
 									<small>Administrator</small>
@@ -136,17 +147,19 @@ BackendAsset::register($this);
                         <li><a href="../../html/pages/calendar.html">My appointments</a></li>
                         <li class="divider"></li>
                         <li><a href="../../html/pages/locked.html"><i class="fa fa-fw fa-lock"></i> Lock</a></li>
-                        <li><a href="<?php echo Yii::$app->urlManager->createUrl(['/site/logout']); ?>"><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
+                        <li><a id="cerrarSesion" data-url="<?php echo Yii::$app->urlManager->createUrl(['oficina/salir']); ?>"><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
                     </ul><!--end .dropdown-menu -->
                 </li><!--end .dropdown -->
             </ul><!--end .header-nav-profile -->
-            <ul class="header-nav header-nav-toggle">
-                <li>
-                    <a class="btn btn-icon-toggle btn-default" href="#offcanvas-search" data-toggle="offcanvas" data-backdrop="false">
-                        <i class="fa fa-ellipsis-v"></i>
-                    </a>
-                </li>
-            </ul><!--end .header-nav-toggle -->
+            <?php if(MetodosHelper::ocultarEnVista('portada')){ ?>
+                <ul class="header-nav header-nav-toggle">
+                    <li>
+                        <a class="btn btn-icon-toggle btn-default" href="#offcanvas-search" data-toggle="offcanvas" data-backdrop="false">
+                            <i class="fa fa-ellipsis-v"></i>
+                        </a>
+                    </li>
+                </ul><!--end .header-nav-toggle -->
+            <?php } ?>
         </div><!--end #header-navbar-collapse -->
     </div>
 </header>
@@ -188,14 +201,14 @@ BackendAsset::register($this);
                 ],
             ]);
             $menuItems = [
-                ['label' => 'Home', 'url' => ['/site/index']],
+                ['label' => 'Home', 'url' => ['/oficina/index']],
             ];
             if (Yii::$app->user->isGuest) {
-                $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+                $menuItems[] = ['label' => 'Login', 'url' => ['/oficina/login']];
             } else {
                 $menuItems[] = [
                     'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                    'url' => ['/site/logout'],
+                    'url' => ['/oficina/logout'],
                     'linkOptions' => ['data-method' => 'post']
                 ];
             }
@@ -222,14 +235,14 @@ BackendAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'Home', 'url' => ['/oficina/index']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => 'Login', 'url' => ['/oficina/login']];
     } else {
         $menuItems[] = [
             'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-            'url' => ['/site/logout'],
+            'url' => ['/oficina/logout'],
             'linkOptions' => ['data-method' => 'post']
         ];
     }
@@ -267,7 +280,7 @@ BackendAsset::register($this);
 
                 <!-- BEGIN DASHBOARD -->
                 <li>
-                    <a href="<?php echo Yii::$app->urlManager->createUrl(['/site/index']); ?>" >
+                    <a href="<?php echo Yii::$app->urlManager->createUrl(['/oficina/']); ?>" >
                         <div class="gui-icon"><i class="md md-home"></i></div>
                         <span class="title">Oficina</span>
                     </a>
@@ -524,7 +537,7 @@ BackendAsset::register($this);
                     <li class="tile">
                         <a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
                             <div class="tile-icon">
-                                <img src="../../assets/img/avatar4.jpg?1404026791" alt="" />
+                                <!--<img src="../../assets/img/avatar4.jpg?1404026791" alt="" />-->
                             </div>
                             <div class="tile-text">
                                 Alex Nelson
@@ -535,7 +548,7 @@ BackendAsset::register($this);
                     <li class="tile">
                         <a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
                             <div class="tile-icon">
-                                <img src="../../assets/img/avatar9.jpg?1404026744" alt="" />
+                                <!--<img src="../../assets/img/avatar9.jpg?1404026744" alt="" />-->
                             </div>
                             <div class="tile-text">
                                 Ann Laurens
@@ -551,7 +564,7 @@ BackendAsset::register($this);
                     <li class="tile">
                         <a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
                             <div class="tile-icon">
-                                <img src="../../assets/img/avatar2.jpg?1404026449" alt="" />
+                                <!--<img src="../../assets/img/avatar2.jpg?1404026449" alt="" />-->
                             </div>
                             <div class="tile-text">
                                 Jessica Cruise
@@ -562,7 +575,7 @@ BackendAsset::register($this);
                     <li class="tile">
                         <a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
                             <div class="tile-icon">
-                                <img src="../../assets/img/avatar8.jpg?1404026729" alt="" />
+                                <!--<img src="../../assets/img/avatar8.jpg?1404026729" alt="" />-->
                             </div>
                             <div class="tile-text">
                                 Jim Peters
@@ -578,7 +591,7 @@ BackendAsset::register($this);
                     <li class="tile">
                         <a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
                             <div class="tile-icon">
-                                <img src="../../assets/img/avatar5.jpg?1404026513" alt="" />
+                                <!--<img src="../../assets/img/avatar5.jpg?1404026513" alt="" />-->
                             </div>
                             <div class="tile-text">
                                 Mabel Logan
@@ -589,7 +602,7 @@ BackendAsset::register($this);
                     <li class="tile">
                         <a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
                             <div class="tile-icon">
-                                <img src="../../assets/img/avatar11.jpg?1404026774" alt="" />
+                                <!--<img src="../../assets/img/avatar11.jpg?1404026774" alt="" />-->
                             </div>
                             <div class="tile-text">
                                 Mary Peterson
@@ -600,7 +613,7 @@ BackendAsset::register($this);
                     <li class="tile">
                         <a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
                             <div class="tile-icon">
-                                <img src="../../assets/img/avatar3.jpg?1404026799" alt="" />
+                                <!--<img src="../../assets/img/avatar3.jpg?1404026799" alt="" />-->
                             </div>
                             <div class="tile-text">
                                 Mike Alba
@@ -616,7 +629,7 @@ BackendAsset::register($this);
                     <li class="tile">
                         <a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
                             <div class="tile-icon">
-                                <img src="../../assets/img/avatar6.jpg?1404026572" alt="" />
+                                <!--<img src="../../assets/img/avatar6.jpg?1404026572" alt="" />-->
                             </div>
                             <div class="tile-text">
                                 Nathan Peterson
@@ -632,7 +645,7 @@ BackendAsset::register($this);
                     <li class="tile">
                         <a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
                             <div class="tile-icon">
-                                <img src="../../assets/img/avatar7.jpg?1404026721" alt="" />
+                                <!--<img src="../../assets/img/avatar7.jpg?1404026721" alt="" />-->
                             </div>
                             <div class="tile-text">
                                 Philip Ericsson
@@ -648,7 +661,7 @@ BackendAsset::register($this);
                     <li class="tile">
                         <a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
                             <div class="tile-icon">
-                                <img src="../../assets/img/avatar10.jpg?1404026762" alt="" />
+                                <!--<img src="../../assets/img/avatar10.jpg?1404026762" alt="" />-->
                             </div>
                             <div class="tile-text">
                                 Samuel Parsons
@@ -684,7 +697,7 @@ BackendAsset::register($this);
                 <ul class="list-chats">
                     <li>
                         <div class="chat">
-                            <div class="chat-avatar"><img class="img-circle" src="../../assets/img/avatar1.jpg?1403934956" alt="" /></div>
+                            <div class="chat-avatar"><!--<img class="img-circle" src="../../assets/img/avatar1.jpg?1403934956" alt="" />--></div>
                             <div class="chat-body">
                                 Yes, it is indeed very beautiful.
                                 <small>10:03 pm</small>
@@ -693,7 +706,7 @@ BackendAsset::register($this);
                     </li>
                     <li class="chat-left">
                         <div class="chat">
-                            <div class="chat-avatar"><img class="img-circle" src="../../assets/img/avatar9.jpg?1404026744" alt="" /></div>
+                            <div class="chat-avatar"><!--<img class="img-circle" src="../../assets/img/avatar9.jpg?1404026744" alt="" />--></div>
                             <div class="chat-body">
                                 Did you see the changes?
                                 <small>10:02 pm</small>
@@ -702,7 +715,7 @@ BackendAsset::register($this);
                     </li>
                     <li>
                         <div class="chat">
-                            <div class="chat-avatar"><img class="img-circle" src="../../assets/img/avatar1.jpg?1403934956" alt="" /></div>
+                            <div class="chat-avatar"><!--<img class="img-circle" src="../../assets/img/avatar1.jpg?1403934956" alt="" />--></div>
                             <div class="chat-body">
                                 I just arrived at work, it was quite busy.
                                 <small>06:44pm</small>
@@ -715,7 +728,7 @@ BackendAsset::register($this);
                     </li>
                     <li class="chat-left">
                         <div class="chat">
-                            <div class="chat-avatar"><img class="img-circle" src="../../assets/img/avatar9.jpg?1404026744" alt="" /></div>
+                            <div class="chat-avatar"><!--<img class="img-circle" src="../../assets/img/avatar9.jpg?1404026744" alt="" />--></div>
                             <div class="chat-body">
                                 The colors are much better now.
                             </div>
@@ -729,7 +742,7 @@ BackendAsset::register($this);
                     </li>
                     <li>
                         <div class="chat">
-                            <div class="chat-avatar"><img class="img-circle" src="../../assets/img/avatar1.jpg?1403934956" alt="" /></div>
+                            <div class="chat-avatar"><!--<img class="img-circle" src="../../assets/img/avatar1.jpg?1403934956" alt="" />--></div>
                             <div class="chat-body">
                                 Are the colors of the logo already adapted?
                                 <small>Last week</small>

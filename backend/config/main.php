@@ -17,8 +17,8 @@ return [
             'defaultRoute' => 'paginas',
         ],
     ],
-    'defaultRoute' => 'site/acceso',
-    'homeUrl' => '/admin/site/index',
+    'defaultRoute' => 'acceso',
+    'homeUrl' => '/admin/oficina',
     'components' => [
         'request' => [
             'baseUrl' => '/admin',
@@ -39,10 +39,11 @@ return [
                     'route' => 'paginas/paginas/indes',
                     //'suffix' => '.htm',
                 ],
-*/              /*'index'     => 'site/index',
-                'login' => 'site/login',
-                'logout' => 'site/logout',
-                *///paginas
+*/              '/' => 'oficina/index',
+                'index' => 'oficina/index',
+                'acceso' => 'oficina/acceso',
+                'salir' => 'oficina/salir',
+                //paginas
                 /*'<module:(paginas)>/<id:\d+>' => '<module>/default/view',
                 '<module:(paginas)>/<action:(index|view|me|delete|create|update|login|logout)>/<id:\d+>' => '<module>/default/<action>',
                 '<module:(paginas)>/<action:(index|view|me|delete|create|update|login|logout)>' => '<module>/default/<action>',
@@ -63,7 +64,7 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'oficina/error',
         ],
     ],
     'params' => $params,
